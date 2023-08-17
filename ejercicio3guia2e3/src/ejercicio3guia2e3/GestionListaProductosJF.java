@@ -15,7 +15,10 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
      */
     public GestionListaProductosJF() {
         initComponents();
-    }
+        cargaJcC();
+        
+    }   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,8 +68,6 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
         jLPrecio.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLPrecio.setText("Precio:");
 
-        jCCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -79,9 +80,9 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
                     .addComponent(jLNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -231,4 +232,9 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+    public void cargaJcC() {
+        jCCategoria.addItem("Electronica");
+        jCCategoria.addItem("Ropa");
+        jCCategoria.addItem("Alimentos");
+    }
 }
