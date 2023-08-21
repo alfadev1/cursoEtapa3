@@ -1,21 +1,25 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ejercicio3guia2e3;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author cyka
  */
 public class GestionListaProductosJF extends javax.swing.JFrame {
-
+    private DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form GestionListaProductosJF
      */
     public GestionListaProductosJF() {
         initComponents();
         cargaJcC();
+        armarCabecera();
         
     }   
     
@@ -41,8 +45,9 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLTitulo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTTabla = new javax.swing.JTable();
         jBAgregar = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,11 +83,11 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
                     .addComponent(jLCategoria)
                     .addComponent(jLPrecio)
                     .addComponent(jLNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTNombre)
                     .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCCategoria, 0, 104, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -113,7 +118,7 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(259, 259, 259)
                 .addComponent(jLTitulo)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +128,7 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -137,14 +142,33 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTTabla);
 
         jBAgregar.setText("Agregar");
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarActionPerformed(evt);
+            }
+        });
+
+        jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,16 +176,22 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jBAgregar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jBAgregar)
+                                .addGap(64, 64, 64)
+                                .addComponent(jBEliminar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,13 +203,44 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jBAgregar)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBAgregar)
+                            .addComponent(jBEliminar))))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        // TODO add your handling code here:
+        try {
+        String categoria = jCCategoria.getSelectedItem().toString();
+        if (jTNombre.getText().isEmpty() || jTPrecio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"No debe haber campos vacios");
+            return;
+        }
+        String nombre = jTNombre.getText();
+        double precio = Double.parseDouble(jTPrecio.getText());
+        Producto pro = new Producto(categoria, nombre, precio);
+        cargaDatos(pro);
+        jTNombre.setText("");
+        jTPrecio.setText("");
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this,"Precio ingresado invalido");
+        }
+    }//GEN-LAST:event_jBAgregarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        // TODO add your handling code here:
+        int filas = jTTabla.getSelectedRow();
+        if (filas != -1) {
+            modelo.removeRow(filas);
+        } else {
+            JOptionPane.showMessageDialog(this,"Seleccione un producto");
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +279,7 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
+    private javax.swing.JButton jBEliminar;
     private javax.swing.JComboBox<String> jCCategoria;
     private javax.swing.JLabel jLCategoria;
     private javax.swing.JLabel jLNombre;
@@ -229,12 +291,21 @@ public class GestionListaProductosJF extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTNombre;
     private javax.swing.JTextField jTPrecio;
+    private javax.swing.JTable jTTabla;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
     public void cargaJcC() {
         jCCategoria.addItem("Electronica");
         jCCategoria.addItem("Ropa");
         jCCategoria.addItem("Alimentos");
+    }
+    private void armarCabecera() {
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Precio");
+        jTTabla.setModel(modelo);
+    }
+    private void cargaDatos(Producto producto) {
+        modelo.addRow(new Object[] {producto.getCategoria(),producto.getNombre(),producto.getPrecio()});
     }
 }
