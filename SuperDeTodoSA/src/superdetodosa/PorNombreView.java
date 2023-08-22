@@ -4,17 +4,25 @@
  */
 package superdetodosa;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author cyka
  */
 public class PorNombreView extends javax.swing.JInternalFrame {
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
 
     /**
      * Creates new form PorNombreView
      */
     public PorNombreView() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -36,6 +44,12 @@ public class PorNombreView extends javax.swing.JInternalFrame {
         jLabel1.setText("Listado Por Nombre");
 
         jLabel2.setText("Escriba los primeros caracteres:");
+
+        jTFPrimerosCaracteres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFPrimerosCaracteresKeyReleased(evt);
+            }
+        });
 
         jTTablaPorNombre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,6 +99,17 @@ public class PorNombreView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFPrimerosCaracteresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPrimerosCaracteresKeyReleased
+        // TODO add your handling code here:
+        borrarFilas();
+        
+        for (Producto prod :MenuPrincipal.listaProductos) {
+            if (prod.getDescripcion().startsWith(jTFPrimerosCaracteres.getText())) {
+                modelo.addRow(new Object[] {prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock()});
+            }
+        }
+    }//GEN-LAST:event_jTFPrimerosCaracteresKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -93,4 +118,18 @@ public class PorNombreView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFPrimerosCaracteres;
     private javax.swing.JTable jTTablaPorNombre;
     // End of variables declaration//GEN-END:variables
+    private void armarCabecera() {
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        jTTablaPorNombre.setModel(modelo);
+    }
+    
+    private void borrarFilas() {
+        int j = modelo.getRowCount() - 1;
+        for (;j >= 0; j--) {
+            modelo.removeRow(j);
+        }
+    }
 }

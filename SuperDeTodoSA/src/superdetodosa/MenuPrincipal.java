@@ -18,6 +18,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        cargaProducto();
     }
 
     /**
@@ -149,6 +150,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
     private void cargaProducto() {
-        listaProductos.add(new Producto(10, "Leche",10, 22, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(10, "Leche",10, 22, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(25, "Huevos", 24, 5, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(15, "Alcohol", ERROR, ABORT, Categoria.PERFUMERIA));
     }
 }
