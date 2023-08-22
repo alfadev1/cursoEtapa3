@@ -19,6 +19,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         cargaProducto();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -55,6 +56,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Administracion");
 
         jMenuItem1.setText("Productos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -103,6 +109,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(pnv);
                 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarProducto apv = new AgregarProducto();
+        apv.setVisible(true);
+        escritorio.add(apv);
+        escritorio.moveToFront(apv);      
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
