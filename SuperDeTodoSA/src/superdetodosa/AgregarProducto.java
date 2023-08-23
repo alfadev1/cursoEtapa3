@@ -4,6 +4,8 @@
  */
 package superdetodosa;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author cyka
@@ -16,6 +18,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     public AgregarProducto() {
         initComponents();
         cargaJRubro();
+        jBEliminar.setEnabled(false);
+        jBNuevo.setEnabled(false);
     }
 
     /**
@@ -38,7 +42,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jTStock = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBBuscar = new javax.swing.JButton();
         jBNuevo = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
@@ -57,8 +61,13 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/superdetodosa/loupe_icon-icons.com_69633 (1).png"))); // NOI18N
-        jButton1.setText("BUSCAR");
+        jBBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\cyka\\Documents\\repositorio ejercicios etapa 3\\cursoEtapa3\\SuperDeTodoSA\\src\\superdetodosa\\loupe_icon-icons.com_69633 (1).png")); // NOI18N
+        jBBuscar.setText("BUSCAR");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jBNuevo.setText("Nuevo");
 
@@ -67,6 +76,11 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jBEliminar.setText("Eliminar");
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,7 +123,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                         .addGap(136, 136, 136)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(jBBuscar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
@@ -131,7 +145,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCodigo)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jBBuscar))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLDescripcion)
@@ -160,14 +174,43 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            for (Producto p : MenuPrincipal.listaProductos) {
+                if (p.getCodigo()== Integer.parseInt(jComboBox1.getSelectedItem().toString())) {
+                    jTDescripcion.setText(p.getDescripcion());
+                    jComboBox1.getModel().setSelectedItem(p.getRubro());
+                    jTPrecio.setText(String.valueOf(p.getPrecio()));
+                    jTStock.setText(String.valueOf(p.getStock()));
+                    activarCampos();
+                    jBEliminar.setEnabled(true);
+                    jBNuevo.setEnabled(true);
+                           
+                    
+                }
+            }
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,"Debe Ingresar un codigo");
+            jTextField1.requestFocus();
+            limpiarCampos();
+            desactivarCampos();
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBNuevo;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Categoria> jComboBox1;
     private javax.swing.JLabel jLCodigo;
     private javax.swing.JLabel jLDescripcion;
     private javax.swing.JLabel jLPrecio;
@@ -180,13 +223,36 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
     private void cargaJRubro() {
-        jComboBox1.addItem(Categoria.COMESTIBLE.toString());
-        jComboBox1.addItem(Categoria.LIMPIEZA.toString());
-        jComboBox1.addItem(Categoria.PERFUMERIA.toString());
+        jComboBox1.addItem(Categoria.COMESTIBLE);
+        jComboBox1.addItem(Categoria.LIMPIEZA);
+        jComboBox1.addItem(Categoria.PERFUMERIA);
     }
     private void agregarProducto() {
-        String categoriaString = (String) jComboBox1.getSelectedItem();
-        Categoria categoria = Categoria.valueOf(categoriaString);
+        Categoria categoria = (Categoria) jComboBox1.getSelectedItem();        
         MenuPrincipal.listaProductos.add(new Producto(Integer.parseInt(jTPrecio.getText()), jTDescripcion.getText(), Integer.parseInt(jTPrecio.getText()), Integer.parseInt(jTStock.getText()), categoria));
+    }
+    
+    private void desactivarCampos() {
+        jTextField1.setEnabled(false);
+        jTDescripcion.setEnabled(false);
+        jTPrecio.setEnabled(false);
+        jComboBox1.setEnabled(false);
+        jTStock.setEnabled(false);
+    }
+    
+    private void activarCampos() {
+        jTextField1.setEnabled(true);
+        jTDescripcion.setEnabled(true);
+        jTPrecio.setEnabled(true);
+        jComboBox1.setEnabled(true);
+        jTStock.setEnabled(true);        
+    }
+    
+    private void limpiarCampos() {
+        jTextField1.setText("");
+        jTDescripcion.setText("");
+        jTPrecio.setText("");
+        jTStock.setText("");
+        
     }
 }
