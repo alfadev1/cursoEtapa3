@@ -63,6 +63,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock:");
 
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/superdetodosa/loupe_icon-icons.com_69633 (1).png"))); // NOI18N
         jBBuscar.setText("BUSCAR");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +86,11 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +131,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                                 .addComponent(jTDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(18, 98, Short.MAX_VALUE)
+                                .addGap(18, 18, Short.MAX_VALUE)
                                 .addComponent(jTStock, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +187,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBNuevo)
                     .addComponent(jBGuardar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEliminar)
                     .addComponent(jBSalir)
@@ -199,6 +205,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
+        
         try {
             for (Producto p : MenuPrincipal.listaProductos) {
                 if (p.getCodigo() == Integer.parseInt(jTextField1.getText())) {
@@ -209,7 +216,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     activarCampos();
                     jBEliminar.setEnabled(true);
                     jBEditar.setEnabled(true);
-
+                    jBNuevo.setEnabled(true);
                 }
             }
         } catch (NumberFormatException e) {
@@ -236,7 +243,6 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     prod.setPrecio(precio);
                     prod.setStock(stock);
                     prod.setRubro(rubro);
-
                     break;
                 }
             }
@@ -259,35 +265,47 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         activarCampos();
         desactivarBotones();
         jTextField1.requestFocus();
-
+        jBBuscar.setEnabled(true);
         jBGuardar.setEnabled(true);
-        jTextField1.setText("");
+        jBNuevo.setEnabled(true);
+        limpiarCampos();
 
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        int codigo = Integer.parseInt(jTextField1.getText());
-        String descripcion = jTDescripcion.getText();
-        double precio = Double.parseDouble(jTPrecio.getText());
-        int stock = Integer.parseInt(jTStock.getText());
-        Categoria rubro = (Categoria) jComboBox1.getSelectedItem();
-        
-        Producto prod = new Producto(codigo, descripcion, precio, stock, rubro);
-        
-        if (MenuPrincipal.listaProductos.contains(prod)) {
-            JOptionPane.showMessageDialog(this, "Ya existe un producto con este código.");
-        } else {
-            MenuPrincipal.listaProductos.add(prod);
-            JOptionPane.showMessageDialog(this, "Producto guardado exitosamente "+descripcion);
+
+        try {
+            int codigo = Integer.parseInt(jTextField1.getText());
+            String descripcion = jTDescripcion.getText();
+            double precio = Double.parseDouble(jTPrecio.getText());
+            int stock = Integer.parseInt(jTStock.getText());
+            Categoria rubro = (Categoria) jComboBox1.getSelectedItem();
+
+            Producto prod = new Producto(codigo, descripcion, precio, stock, rubro);
+
+            if (MenuPrincipal.listaProductos.contains(prod)) {
+                JOptionPane.showMessageDialog(this, "Ya existe un producto con este código.");
+            } else {
+                MenuPrincipal.listaProductos.add(prod);
+                JOptionPane.showMessageDialog(this, "Producto guardado exitosamente " + descripcion);
+            }
+            limpiarCampos();
+            jTextField1.requestFocus();
+            desactivarCampos();
+        } catch (Exception e) {
+            jTextField1.requestFocus();
+            limpiarCampos();
+            JOptionPane.showMessageDialog(this, "Rellene todos los campos");
         }
-        limpiarCampos();
-        jTextField1.requestFocus();
-        desactivarCampos();
-        
-        
+
 
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -351,4 +369,5 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jTStock.setText("");
 
     }
+
 }
