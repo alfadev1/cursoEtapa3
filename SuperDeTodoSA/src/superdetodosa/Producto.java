@@ -4,6 +4,8 @@
  */
 package superdetodosa;
 
+import java.util.Objects;
+
 /**
  *
  * @author cyka
@@ -72,6 +74,18 @@ public class Producto implements Comparable<Producto> {
         } else {
             return -1;
         }
+    }
+     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return codigo == producto.codigo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
     }
     
     

@@ -19,7 +19,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         initComponents();
         cargaJRubro();
         jBEliminar.setEnabled(false);
-        jBNuevo.setEnabled(false);
+        jBEditar.setEnabled(false);
+        jBGuardar.setEnabled(false);
     }
 
     /**
@@ -47,6 +48,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jBGuardar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel1.setText("Gestion de Productos");
@@ -61,7 +63,6 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock:");
 
-        jBBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\cyka\\Documents\\repositorio ejercicios etapa 3\\cursoEtapa3\\SuperDeTodoSA\\src\\superdetodosa\\loupe_icon-icons.com_69633 (1).png")); // NOI18N
         jBBuscar.setText("BUSCAR");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,8 +71,18 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         });
 
         jBNuevo.setText("Nuevo");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
 
@@ -79,6 +90,13 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
+            }
+        });
+
+        jBEditar.setText("Editar");
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
             }
         });
 
@@ -106,19 +124,18 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 98, Short.MAX_VALUE)
+                                .addComponent(jTStock, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addComponent(jBGuardar)))
+                                    .addComponent(jBNuevo)
+                                    .addComponent(jBEditar))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jTStock, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jBEliminar)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                                    .addComponent(jBEliminar)
+                                    .addComponent(jBGuardar))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,9 +148,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jBNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBSalir)
                 .addGap(22, 22, 22))
         );
@@ -162,12 +177,15 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBNuevo)
-                    .addComponent(jBGuardar)
+                    .addComponent(jBGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEliminar)
-                    .addComponent(jBSalir))
+                    .addComponent(jBSalir)
+                    .addComponent(jBEditar))
                 .addGap(44, 44, 44))
         );
 
@@ -183,29 +201,98 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             for (Producto p : MenuPrincipal.listaProductos) {
-                if (p.getCodigo()== Integer.parseInt(jComboBox1.getSelectedItem().toString())) {
+                if (p.getCodigo() == Integer.parseInt(jTextField1.getText())) {
                     jTDescripcion.setText(p.getDescripcion());
                     jComboBox1.getModel().setSelectedItem(p.getRubro());
                     jTPrecio.setText(String.valueOf(p.getPrecio()));
                     jTStock.setText(String.valueOf(p.getStock()));
                     activarCampos();
                     jBEliminar.setEnabled(true);
-                    jBNuevo.setEnabled(true);
-                           
-                    
+                    jBEditar.setEnabled(true);
+
                 }
             }
-        } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this,"Debe Ingresar un codigo");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debe Ingresar un codigo");
             jTextField1.requestFocus();
             limpiarCampos();
             desactivarCampos();
+            jBEditar.setEnabled(false);
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int codigo = Integer.parseInt(jTextField1.getText());
+            String descripcion = jTDescripcion.getText();
+            double precio = Double.parseDouble(jTPrecio.getText());
+            int stock = Integer.parseInt(jTStock.getText());
+            Categoria rubro = (Categoria) jComboBox1.getSelectedItem();
+
+            for (Producto prod : MenuPrincipal.listaProductos) {
+                if (codigo == prod.getCodigo()) {
+                    prod.setDescripcion(descripcion);
+                    prod.setPrecio(precio);
+                    prod.setStock(stock);
+                    prod.setRubro(rubro);
+
+                    break;
+                }
+            }
+
+            JOptionPane.showMessageDialog(this, "Actualizado");
+            jTextField1.requestFocus();
+            limpiarCampos();
+            desactivarCampos();
+            jBEditar.setEnabled(false);
+        } catch (NumberFormatException e) {
+            jTextField1.requestFocus();
+            limpiarCampos();
+            JOptionPane.showMessageDialog(this, "Rellene todos los campos");
+        }
+
+    }//GEN-LAST:event_jBEditarActionPerformed
+
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+        // TODO add your handling code here:
+        activarCampos();
+        desactivarBotones();
+        jTextField1.requestFocus();
+
+        jBGuardar.setEnabled(true);
+        jTextField1.setText("");
+
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        // TODO add your handling code here:
+        int codigo = Integer.parseInt(jTextField1.getText());
+        String descripcion = jTDescripcion.getText();
+        double precio = Double.parseDouble(jTPrecio.getText());
+        int stock = Integer.parseInt(jTStock.getText());
+        Categoria rubro = (Categoria) jComboBox1.getSelectedItem();
+        
+        Producto prod = new Producto(codigo, descripcion, precio, stock, rubro);
+        
+        if (MenuPrincipal.listaProductos.contains(prod)) {
+            JOptionPane.showMessageDialog(this, "Ya existe un producto con este código.");
+        } else {
+            MenuPrincipal.listaProductos.add(prod);
+            JOptionPane.showMessageDialog(this, "Producto guardado exitosamente "+descripcion);
+        }
+        limpiarCampos();
+        jTextField1.requestFocus();
+        desactivarCampos();
+        
+        
+
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBNuevo;
@@ -227,32 +314,41 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jComboBox1.addItem(Categoria.LIMPIEZA);
         jComboBox1.addItem(Categoria.PERFUMERIA);
     }
+
     private void agregarProducto() {
-        Categoria categoria = (Categoria) jComboBox1.getSelectedItem();        
+        Categoria categoria = (Categoria) jComboBox1.getSelectedItem();
         MenuPrincipal.listaProductos.add(new Producto(Integer.parseInt(jTPrecio.getText()), jTDescripcion.getText(), Integer.parseInt(jTPrecio.getText()), Integer.parseInt(jTStock.getText()), categoria));
     }
-    
+
     private void desactivarCampos() {
-        jTextField1.setEnabled(false);
+
         jTDescripcion.setEnabled(false);
         jTPrecio.setEnabled(false);
         jComboBox1.setEnabled(false);
         jTStock.setEnabled(false);
     }
-    
+
     private void activarCampos() {
         jTextField1.setEnabled(true);
         jTDescripcion.setEnabled(true);
         jTPrecio.setEnabled(true);
         jComboBox1.setEnabled(true);
-        jTStock.setEnabled(true);        
+        jTStock.setEnabled(true);
     }
-    
+
+    private void desactivarBotones() {
+        jBBuscar.setEnabled(false);
+        jBEditar.setEnabled(false);
+        jBEliminar.setEnabled(false);
+        jBGuardar.setEnabled(false);
+        jBNuevo.setEnabled(false);
+    }
+
     private void limpiarCampos() {
         jTextField1.setText("");
         jTDescripcion.setText("");
         jTPrecio.setText("");
         jTStock.setText("");
-        
+
     }
 }
