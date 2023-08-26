@@ -63,7 +63,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Stock:");
 
-        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/superdetodosa/loupe_icon-icons.com_69633 (1).png"))); // NOI18N
+        jBBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\cyka\\Documents\\repositorio ejercicios etapa 3\\cursoEtapa3\\SuperDeTodoSA\\src\\superdetodosa\\loupe_icon-icons.com_69633 (1).png")); // NOI18N
         jBBuscar.setText("BUSCAR");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +205,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             for (Producto p : MenuPrincipal.listaProductos) {
                 if (p.getCodigo() == Integer.parseInt(jTextField1.getText())) {
@@ -296,7 +296,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             jTextField1.requestFocus();
             limpiarCampos();
-            JOptionPane.showMessageDialog(this, "Rellene todos los campos");
+            JOptionPane.showMessageDialog(this, "Rellene todos los campos o coloque los datos correctos");
         }
 
 
@@ -304,7 +304,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jBEliminarActionPerformed
 
 

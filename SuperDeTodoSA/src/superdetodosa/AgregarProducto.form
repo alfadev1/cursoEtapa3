@@ -184,7 +184,7 @@
     <Component class="javax.swing.JButton" name="jBBuscar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/superdetodosa/loupe_icon-icons.com_69633 (1).png"/>
+          <Image iconType="2" name="C:\Users\cyka\Documents\repositorio ejercicios etapa 3\cursoEtapa3\SuperDeTodoSA\src\superdetodosa\loupe_icon-icons.com_69633 (1).png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="BUSCAR"/>
       </Properties>
