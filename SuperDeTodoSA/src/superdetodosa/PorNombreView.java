@@ -94,8 +94,8 @@ public class PorNombreView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTFPrimerosCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,7 +106,7 @@ public class PorNombreView extends javax.swing.JInternalFrame {
         borrarFilas();
         
         for (Producto prod :MenuPrincipal.listaProductos) {
-            if (prod.getDescripcion().startsWith(jTFPrimerosCaracteres.getText())) {
+            if (prod.getDescripcion().toLowerCase().startsWith(jTFPrimerosCaracteres.getText().toLowerCase())) {
                 modelo.addRow(new Object[] {prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock()});
             }
         }

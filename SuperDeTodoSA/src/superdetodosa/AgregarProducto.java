@@ -4,6 +4,7 @@
  */
 package superdetodosa;
 
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 /**
@@ -205,7 +206,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
-
+        boolean seEncontro = false;
         try {
             for (Producto p : MenuPrincipal.listaProductos) {
                 if (p.getCodigo() == Integer.parseInt(jTextField1.getText())) {
@@ -217,7 +218,12 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                     jBEliminar.setEnabled(true);
                     jBEditar.setEnabled(true);
                     jBNuevo.setEnabled(true);
+                    seEncontro = true;
+                    break;
                 }
+            }
+            if (!seEncontro) {
+                JOptionPane.showMessageDialog(null, "No hay coincidencias");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Debe Ingresar un codigo");
@@ -293,7 +299,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             limpiarCampos();
             jTextField1.requestFocus();
             desactivarCampos();
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             jTextField1.requestFocus();
             limpiarCampos();
             JOptionPane.showMessageDialog(this, "Rellene todos los campos o coloque los datos correctos");
@@ -304,6 +310,26 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         // TODO add your handling code here:
+        try {
+            int cod = Integer.parseInt(jTextField1.getText());
+            boolean seElimino = false;
+            Iterator<Producto> iterator = MenuPrincipal.listaProductos.iterator();
+            while (iterator.hasNext()) {
+                Producto prod = iterator.next();
+                if (prod.getCodigo() == cod) {
+                    iterator.remove();
+                    JOptionPane.showMessageDialog(this, "Producto con codigo " + cod + " eliminado exitosamente");
+                    seElimino = true;
+                }
+            }
+            limpiarCampos();
+            if (!seElimino) {
+                JOptionPane.showMessageDialog(null, "No hay coincidencias");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Campos vacios o incorrectos");
+        }
+
 
     }//GEN-LAST:event_jBEliminarActionPerformed
 
@@ -328,6 +354,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
     private void cargaJRubro() {
+        jComboBox1.addItem(null);
         jComboBox1.addItem(Categoria.COMESTIBLE);
         jComboBox1.addItem(Categoria.LIMPIEZA);
         jComboBox1.addItem(Categoria.PERFUMERIA);

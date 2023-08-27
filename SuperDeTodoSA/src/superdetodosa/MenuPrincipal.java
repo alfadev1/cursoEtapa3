@@ -77,9 +77,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Por Rubro...");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Por Precio...");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -120,6 +130,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(apv);
         escritorio.moveToFront(apv);      
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        PorRubroView prv = new PorRubroView();
+        prv.setVisible(true);
+        escritorio.add(prv);
+        escritorio.moveToFront(prv);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        PorPrecioView ppv = new PorPrecioView();
+        ppv.setVisible(true);
+        escritorio.add(ppv);
+        escritorio.moveToFront(ppv);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

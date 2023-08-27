@@ -4,17 +4,29 @@
  */
 package superdetodosa;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author cyka
  */
 public class PorRubroView extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
+
     /**
      * Creates new form PorRubroView
      */
     public PorRubroView() {
         initComponents();
+        cargaComboBox();
+        armarCabecera();  
+        this.setClosable(true);
+        
     }
 
     /**
@@ -27,19 +39,24 @@ public class PorRubroView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jLSeleccion = new javax.swing.JLabel();
+        jCRubro = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTTablaPorRubro = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel1.setText("Listado por Rubro");
 
-        jLabel2.setText("Seleccione el Rubro:");
+        jLSeleccion.setText("Seleccione el Rubro:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new Categoria[] {}));
+        jCRubro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCRubroItemStateChanged(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTTablaPorRubro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -50,7 +67,7 @@ public class PorRubroView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTTablaPorRubro);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,9 +80,9 @@ public class PorRubroView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel2)
+                        .addComponent(jLSeleccion)
                         .addGap(119, 119, 119)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -77,8 +94,8 @@ public class PorRubroView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLSeleccion)
+                    .addComponent(jCRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 23, Short.MAX_VALUE))
@@ -87,12 +104,40 @@ public class PorRubroView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCRubroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCRubroItemStateChanged
+        // TODO add your handling code here:
+        borrarFilas();
+        for (Producto prod : MenuPrincipal.listaProductos) {
+            if (prod.getRubro().equals(jCRubro.getSelectedItem())) {
+                modelo.addRow(new Object[] { prod.getCodigo(),prod.getDescripcion(),prod.getPrecio(),prod.getStock() });
+            }
+        }
+    }//GEN-LAST:event_jCRubroItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Categoria> jCRubro;
+    private javax.swing.JLabel jLSeleccion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTTablaPorRubro;
     // End of variables declaration//GEN-END:variables
+    private void cargaComboBox() {
+       jCRubro.addItem(null);
+       jCRubro.addItem(Categoria.COMESTIBLE);
+       jCRubro.addItem(Categoria.LIMPIEZA);
+       jCRubro.addItem(Categoria.PERFUMERIA);
+    }
+    private void armarCabecera() {
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        jTTablaPorRubro.setModel(modelo);
+    }
+    private void borrarFilas() {        
+        for (int filas = jTTablaPorRubro.getRowCount()-1 ;filas >= 0; filas--) {
+            modelo.removeRow(filas);
+        }
+    }
 }
