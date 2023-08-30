@@ -7,6 +7,8 @@ package tareasok;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -98,6 +100,11 @@ public class ToDoApp extends javax.swing.JFrame {
         jBListaCompletas.setText("Complete");
 
         jBListaPendiente.setText("ToDo");
+        jBListaPendiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBListaPendienteActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Exit");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +221,7 @@ public class ToDoApp extends javax.swing.JFrame {
         jBListaCompletas.setEnabled(true);
         jBListaPendiente.setEnabled(true);
         
+        
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -250,6 +258,16 @@ public class ToDoApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         jBActualizar.setEnabled(true);
     }//GEN-LAST:event_jCBPendienteCompletaStateChanged
+
+    private void jBListaPendienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBListaPendienteActionPerformed
+        // TODO add your handling code here:
+        VistaPendiente vp = new VistaPendiente();
+        vp.setVisible(true);
+        this.add(vp);
+        this.toBack();
+        
+        
+    }//GEN-LAST:event_jBListaPendienteActionPerformed
 
     /**
      * @param args the command line arguments
