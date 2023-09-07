@@ -66,7 +66,7 @@ public class PorPrecioView extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTtablaPorPrecio);
 
-        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/superdetodosa/loupe_icon-icons.com_69633 (1).png"))); // NOI18N
+        jBBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\cyka\\Documents\\repositorio ejercicios etapa 3\\cursoEtapa3\\SuperDeTodoSA\\src\\superdetodosa\\loupe_icon-icons.com_69633 (1).png")); // NOI18N
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
